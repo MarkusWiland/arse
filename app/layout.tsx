@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "./_components/Header";
+import clsx from "clsx";
+import { ClerkProvider } from "@clerk/nextjs";
+import Footer from "./_components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <ClerkProvider>
+    <html lang="en" className="relative">
+      <body className={clsx(inter.className, "antialiased bg-[#F9D1D1]")}>
+        <Header />
+        {children}
+        <Footer />
+        </body>
     </html>
+    </ClerkProvider>
   );
 }
